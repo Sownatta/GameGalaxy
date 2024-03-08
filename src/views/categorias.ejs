@@ -1,0 +1,14 @@
+<table>
+    <thead>
+        <tr>
+            <th>Categorias</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% categoryList.forEach(category => { %>
+            <tr>
+                <td><%= category.Nome %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>

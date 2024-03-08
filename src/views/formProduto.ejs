@@ -1,0 +1,30 @@
+<div class="section-container">
+
+    <h1>Cadastro de Produto</h1>
+
+    <form action="/product-register" method="post">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="stock">Estoque:</label>
+        <input type="text" id="stock" name="stock" required>
+
+        <label for="categoryId">CategoriaID:</label>
+        <input type="text" id="categoryId" name="categoryId" required>
+
+        <label for="price">Preco:</label>
+        <input type="text" id="price" name="price" step="0.01" required>
+
+        <label for="description">Descricao:</label>
+        <input type="text" id="description" name="description" required>
+
+        <label for="imgUrl">ImgURL:</label>
+        <input type="url" id="imgUrl" name="imgUrl" required>
+
+        <label for="userId">UserID:</label>
+        <input type="text" id="userId" name="userId" required>
+
+        <button class="r-product_button" type="submit">Cadastrar</button>
+    </form>
+    
+</div>

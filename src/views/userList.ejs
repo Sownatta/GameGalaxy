@@ -1,0 +1,16 @@
+<div class="section-container">
+
+    <h1>Lista de Usuários</h1>
+
+    <ul class="user-list">
+      <% UserList.forEach(user => { %>
+        <li>
+          <strong>Nome:</strong> <%= user.name %><br>
+          <strong>CPF:</strong> <%= user.cpf %><br>
+          <strong>Data de Nascimento:</strong> <%= user.birthday %><br>
+          <strong>Email:</strong> <%= user.email %><br>
+        </li>
+      <% }); %>
+    </ul>
+    
+  </div>

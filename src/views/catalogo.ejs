@@ -1,0 +1,18 @@
+<div class="product-container">
+  <% ProductList.forEach(product => { %>
+    <div class="product-card">
+      <img src="<%= product.imgUrl %>" alt="<%= product.name %>" class="product-image">
+      <div class="product-details">
+        <h2><%= product.name %></h2>
+        <p><strong>Estoque:</strong> <%= product.stock %></p>
+        <p><strong>Categoria:</strong> <%= product.categoryId %></p>
+        <p><strong>Preço:</strong> R$ <%= product.price %></p>
+        <p><strong>Descrição:</strong> <%= product.description %></p>
+        <p><strong>Vendedor:</strong> <%= product.userId %></p>
+        <a href="/product/<%= product.id %>" class="product-button">Ver Detalhes</a>
+        <a class="edit-button" href="/product-update/<%= product.id %>">Editar</a>
+        <a class="delete-button" href="/product-delete/<%= product.id %>">Deletar</a>
+      </div>
+    </div>
+  <% }); %>
+</div>

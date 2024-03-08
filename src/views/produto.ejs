@@ -1,0 +1,17 @@
+<div class="product-container">
+  <h1><%= product.name %></h1>
+
+  <div class="product-container">
+    <div class="product-card">
+      <img src="<%= product.imgUrl %>" alt="<%= product.name %>" class="product-image">
+      <div class="product-details">
+        <p><strong>Estoque:</strong> <%= product.stock %></p>
+        <p><strong>Categoria:</strong> <%= product.categoryId %></p>
+        <p><strong>Preço:</strong> R$ <%= product.price %></p>
+        <p><strong>Descrição:</strong> <%= product.description %></p>
+        <p><strong>Vendedor:</strong> <%= product.userId %></p>
+      </div>
+    </div>
+  </div>
+
+</div>

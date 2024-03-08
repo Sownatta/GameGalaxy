@@ -1,0 +1,614 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "GameGalaxy API",
+      "description": "API para o marketplace de artigos gamers GameGalaxy.",
+      "version": "1.0.11"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:9000/home",
+        "description": "Local Server."
+      }
+    ],
+    "paths": {
+      "/home": {
+        "get": {
+          "summary": "Rertorna uma página de boas-vindas.",
+          "description": "Home page da GameGalaxy API",
+          "responses": {
+            "200": {
+              "description": "Retorna a página HTML de boas-vindas.",
+              "content": {
+                "text/html": {
+                  "schema": {
+                    "type": "string",
+                    "example": "<section><h2>Bem-vindo ao Game Galaxy!</h2><p>Unlock Your Gaming Dreams!</p></section>"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories": {
+        "get": {
+          "summary": "Retorna uma lista de categorias.",
+          "description": "Categorias de artigos vendidos na GameGalaxy.",
+          "responses": {
+            "200": {
+              "description": "A JSON array of category names",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/category-register": {
+        "post": {
+          "summary": "Cria uma nova categoria.",
+          "responses": {
+            "201": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/category/{id}": {
+        "put": {
+          "summary": "Atualiza categoria com o id especificado",
+          "responses": {
+            "201": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Deleta categoria com o id especificado",
+          "responses": {
+            "204": {
+              "description": "Categoria deletada com sucesso."
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "description": "ID da categoria a ser deletada.",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ]
+        }
+      },
+      "/users": {
+        "get": {
+          "summary": "Retorna uma página HTML com uma lista dos usuários cadastrados.",
+          "responses": {
+            "200": {
+              "description": "Página HTML com uma lista de usuários cadastrados.",
+              "content": {
+                "text/html": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{id}": {
+        "get": {
+          "summary": "Retorna uma página HTML com o usuário de id especificado.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID do usuário a ser retornado.",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Usuário encontrado com sucesso.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "cpf": {
+                        "type": "string"
+                      },
+                      "birthday": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Usuário não encontrado."
+            }
+          }
+        },
+        "put": {
+          "summary": "Atualiza informações de um usuário específico.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID do usuário a ser atualizado.",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Novos dados do usuário.",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
+                    },
+                    "birthday": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "204": {
+              "description": "Usuário atualizado com sucesso."
+            },
+            "404": {
+              "description": "Usuário não encontrado."
+            }
+          }
+        },
+        "delete": {
+          "summary": "Deleta um usuário específico.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID do usuário a ser deletado.",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Usuário deletado com sucesso."
+            },
+            "404": {
+              "description": "Usuário não encontrado."
+            }
+          }
+        }
+      },
+      "/user-register": {
+        "get": {
+          "summary": "Rertorna uma página HTML com o formulário de cadastro de usuário.",
+          "responses": {
+            "200": {
+              "content": {
+                "text/html": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Cria um novo usuário.",
+          "requestBody": {
+            "description": "Dados do novo usuário.",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
+                    },
+                    "birthday": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Usuário criado com sucesso."
+            },
+            "400": {
+              "description": "Requisição inválida. Certifique-se de fornecer todos os dados necessários."
+            }
+          }
+        }
+      },
+      "/catalog": {
+        "get": {
+          "summary": "Retorna uma lista de produtos.",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "name",
+              "schema": {
+                "type": "string"
+              },
+              "description": "Filtra por nome do produto."
+            },
+            {
+              "in": "query",
+              "name": "categoryId",
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Filtra por ID da categoria."
+            },
+            {
+              "in": "query",
+              "name": "userId",
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Filtra por ID do usuário."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Lista de produtos.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/src/models/ProductTypes"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Requisição inválida. Certifique-se de fornecer parâmetros válido."
+            }
+          },
+          "x-swagger-router-controller": "ProductController"
+        }
+      },
+      "/products/{id}": {
+        "get": {
+          "summary": "Retorna um produto com base no ID.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID do produto."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Dados do produto.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/src/models/ProductTypes"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Produto não encontrado."
+            },
+            "500": {
+              "description": "Erro interno do servidor ao buscar o produto."
+            }
+          },
+          "x-swagger-router-controller": "ProductController"
+        },
+        "put": {
+          "summary": "Atualiza um produto com base no ID.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID do produto."
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "description": "Dados do produto a serem atualizados.",
+              "schema": {
+                "$ref": "#/src/models/ProductTypes"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Produto atualizado com sucesso."
+            },
+            "404": {
+              "description": "Produto não encontrado."
+            },
+            "500": {
+              "description": "Erro interno do servidor ao atualizar o produto."
+            }
+          },
+          "x-swagger-router-controller": "ProductController"
+        },
+        "delete": {
+          "summary": "Deleta um produto com base no ID.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID do produto."
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Produto deletado com sucesso."
+            },
+            "404": {
+              "description": "Produto não encontrado."
+            },
+            "500": {
+              "description": "Erro interno do servidor ao deletar o produto."
+            }
+          },
+          "x-swagger-router-controller": "ProductController"
+        }
+      },
+      "/product-register": {
+        "get": {
+          "summary": "Rertorna uma página HTML com o formulário de registro de produto.",
+          "responses": {
+            "200": {
+              "content": {
+                "text/html": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Cria um novo produto.",
+          "requestBody": {
+            "description": "Dados do novo produto a serem criados.",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/src/models/ProductTypes"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Produto criado com sucesso."
+            },
+            "400": {
+              "description": "Dados inválidos fornecidos para criar o produto."
+            },
+            "500": {
+              "description": "Erro interno do servidor ao criar o produto."
+            }
+          },
+          "x-swagger-router-controller": "ProductController"
+        }
+      },
+      "/product-update": {
+        "get": {
+          "summary": "Redireciona para a página de edição de um produto.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID do produto a ser editado.",
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Redireciona com sucesso para a página de edição.",
+              "content": {
+                "text/html": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Produto não encontrado."
+            },
+            "500": {
+              "description": "Erro interno do servidor ao redirecionar para a página de edição."
+            }
+          },
+          "x-swagger-router-controller": "ProductController"
+        },
+        "post": {
+          "summary": "Edita um produto com o ID especificado.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID do produto a ser editado.",
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Dados do produto para edição.",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/src/models/ProductTypes"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Produto editado com sucesso."
+            },
+            "404": {
+              "description": "Produto não encontrado."
+            },
+            "500": {
+              "description": "Erro interno do servidor ao editar o produto."
+            }
+          },
+          "x-swagger-router-controller": "ProductController"
+        }
+      },
+      "/product-delete/{id}": {
+        "get": {
+          "summary": "Apaga um produto com o ID especificado.",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID do produto a ser apagado.",
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Produto apagado com sucesso."
+            },
+            "404": {
+              "description": "Produto não encontrado."
+            },
+            "500": {
+              "description": "Erro interno do servidor ao apagar o produto."
+            }
+          },
+          "x-swagger-router-controller": "ProductController"
+        }
+      }
+    }
+  }
+  
